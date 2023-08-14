@@ -3,7 +3,6 @@
 public class PlayerPaddleMovement : MonoBehaviour
 {
     [SerializeField] private float _playerPaddleMovementSpeed; // Скорость перемещения платформы
-    [SerializeField] private float _verticalPadding; // Вертикальный отступ от границы экрана
 
     private Rigidbody2D _playerPaddleRigidbody2D; // Ссылка на компонент Rigidbody2D платформы
     private float _verticalInput; // Значение вертикального ввода

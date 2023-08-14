@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _initialForce: 10
-  _maxSpeed: 20
+  _maxSpeed: 40
 --- !u!50 &120626772
 Rigidbody2D:
   serializedVersion: 4
@@ -660,6 +660,7 @@ GameObject:
   - component: {fileID: 852973157}
   - component: {fileID: 852973156}
   - component: {fileID: 852973155}
+  - component: {fileID: 852973158}
   m_Layer: 0
   m_Name: PlayerPaddle
   m_TagString: Untagged
@@ -788,13 +789,26 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 852973152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c781effc562774042aa0388f18bf8485, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPaddleMovementSpeed: 10
-  _verticalPadding: 0
+--- !u!114 &852973158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852973152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c8d42f890fdc348a0d105c415db4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballTransform: {fileID: 120626770}
+  _movementSpeed: 10
 --- !u!1 &977748358
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +903,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1294751673}
   - component: {fileID: 1294751672}
+  - component: {fileID: 1294751676}
   - component: {fileID: 1294751675}
   - component: {fileID: 1294751674}
   m_Layer: 0
@@ -959,7 +974,7 @@ Transform:
   m_GameObject: {fileID: 1294751671}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 7, z: 1}
+  m_LocalScale: {x: 1, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -1011,7 +1026,21 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 7
+  m_Constraints: 5
+--- !u!114 &1294751676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1294751671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30c8d42f890fdc348a0d105c415db4f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ballTransform: {fileID: 120626770}
+  _movementSpeed: 10
 --- !u!1 &1451633706
 GameObject:
   m_ObjectHideFlags: 0
