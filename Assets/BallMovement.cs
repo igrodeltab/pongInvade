@@ -6,10 +6,12 @@ public class BallMovement : MonoBehaviour
     [SerializeField] private float _maxSpeed; // Максимальная скорость мяча
 
     private Rigidbody2D _ballRigidbody2D; // Ссылка на компонент Rigidbody2D мяча
+    private Vector2 _initialPosition; // Исходная позиция мяча
 
     private void Awake()
     {
         _ballRigidbody2D = GetComponent<Rigidbody2D>();
+        _initialPosition = transform.position;
     }
 
     private void Start()
@@ -45,5 +47,12 @@ public class BallMovement : MonoBehaviour
         // Применение случайного влияния на направление мяча при столкновении
         Vector2 randomDirection = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)).normalized;
         _ballRigidbody2D.velocity = (_ballRigidbody2D.velocity + randomDirection).normalized * _ballRigidbody2D.velocity.magnitude;
+    }
+
+    public void RespawnBall()
+    {
+        transform.position = _initialPosition; // Возвращаем мяч на исходную позицию
+        _ballRigidbody2D.velocity = Vector2.zero; // Сбрасываем скорость
+        LaunchBall(); // Запускаем мяч заново
     }
 }
