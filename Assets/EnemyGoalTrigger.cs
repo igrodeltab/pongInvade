@@ -9,7 +9,7 @@ public class EnemyGoalTrigger : MonoBehaviour
     {
         if (other.GetComponent<BallMovement>() != null)
         {
-            _scoreSystem.PlayerScored();
+            _scoreSystem.EnemyScored();
             _ballMovement.RespawnBall(); // Вызов метода для переброса мяча на центр поля
         }
     }
