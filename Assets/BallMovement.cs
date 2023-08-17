@@ -4,6 +4,9 @@ public class BallMovement : MonoBehaviour
 {
     [SerializeField] private float _initialForce; // Начальная сила для запуска мяча
     [SerializeField] private float _maxSpeed; // Максимальная скорость мяча
+    [SerializeField] private float _collisionAcceleration = 1.2f; // Ускорение при столкновении
+    [SerializeField] private float _randomDirectionRangeX = 0.2f; // Диапазон случайного направления по X
+    [SerializeField] private float _randomDirectionRangeY = 0.2f; // Диапазон случайного направления по Y
 
     private Rigidbody2D _ballRigidbody2D; // Ссылка на компонент Rigidbody2D мяча
     private Vector2 _initialPosition; // Исходная позиция мяча
@@ -26,8 +29,9 @@ public class BallMovement : MonoBehaviour
 
     private void LaunchBall()
     {
-        float randomDirection = Random.Range(0, 2) == 0 ? -1 : 1; // Случайное направление запуска мяча по X
-        Vector2 launchDirection = new Vector2(randomDirection, Random.Range(-0.5f, 0.5f)).normalized;
+        float randomDirectionX = Random.Range(-_randomDirectionRangeX, _randomDirectionRangeX);
+        float randomDirectionY = Random.Range(-_randomDirectionRangeY, _randomDirectionRangeY);
+        Vector2 launchDirection = new Vector2(randomDirectionX, randomDirectionY).normalized;
 
         _ballRigidbody2D.AddForce(launchDirection * _initialForce, ForceMode2D.Impulse); // Применение начальной силы
     }
@@ -44,8 +48,13 @@ public class BallMovement : MonoBehaviour
     // Вызывается при столкновении мяча с другим объектом
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Применение ускорения при столкновении
+        _ballRigidbody2D.velocity += _ballRigidbody2D.velocity.normalized * (_collisionAcceleration - 1f);
+
         // Применение случайного влияния на направление мяча при столкновении
-        Vector2 randomDirection = new Vector2(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f)).normalized;
+        Vector2 randomDirection = new Vector2(Random.Range(-_randomDirectionRangeX, _randomDirectionRangeX),
+                                              Random.Range(-_randomDirectionRangeY, _randomDirectionRangeY)).normalized;
+
         _ballRigidbody2D.velocity = (_ballRigidbody2D.velocity + randomDirection).normalized * _ballRigidbody2D.velocity.magnitude;
     }
 

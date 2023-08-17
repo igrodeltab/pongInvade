@@ -10,7 +10,7 @@ public class GameInitializer : MonoBehaviour
 
     private bool _gameStarted = false;
 
-    private void Start()
+    private void Awake()
     {
         _ballMovement.enabled = false;
         _playerPaddleMovement.enabled = false;
