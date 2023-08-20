@@ -5,12 +5,26 @@ public class ScoreSystem : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _playerScoreText; // Ссылка на текстовый компонент для счета игрока
     [SerializeField] private TextMeshProUGUI _enemyScoreText; // Ссылка на текстовый компонент для счета врага
+    [SerializeField] private GameInitializer _gameInitializer;
 
-    private int _playerScore = 0; // Счет игрока
-    private int _enemyScore = 0; // Счет врага
+    private int _playerScore; // Счет игрока
+    private int _enemyScore; // Счет врага
+    public int _winScore;
+
+    private void Awake()
+    {
+        ResetGameScoreUI();
+    }
 
     private void Start()
     {
+        UpdateScoreUI();
+    }
+
+    public void ResetGameScoreUI()
+    {
+        _playerScore = 0;
+        _enemyScore = 0;
         UpdateScoreUI();
     }
 
@@ -19,6 +33,7 @@ public class ScoreSystem : MonoBehaviour
     {
         _playerScore++;
         UpdateScoreUI();
+        CheckScore();
     }
 
     // Вызывается при попадании мяча в ворота врага
@@ -26,6 +41,7 @@ public class ScoreSystem : MonoBehaviour
     {
         _enemyScore++;
         UpdateScoreUI();
+        CheckScore();
     }
 
     // Обновление текстового компонента счета
@@ -33,5 +49,20 @@ public class ScoreSystem : MonoBehaviour
     {
         _playerScoreText.text = _playerScore.ToString();
         _enemyScoreText.text = _enemyScore.ToString();
+    }
+
+    private void CheckScore()
+    {
+        if (_playerScore >= _winScore)
+        {
+            _gameInitializer.DisableGameplay();
+            _gameInitializer.ShowWinnerText("you win");
+        }
+
+        if (_enemyScore >= _winScore)
+        {
+            _gameInitializer.DisableGameplay();
+            _gameInitializer.ShowWinnerText("you lose");
+        }
     }
 }

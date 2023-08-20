@@ -13,7 +13,7 @@ public class BlinkingText : MonoBehaviour
     {
         _timer += Time.deltaTime;
 
-        if (_timer >= 1f / _blinkSpeed) // Если прошло достаточно времени для мигания
+        if (_timer >= _blinkSpeed) // Если прошло достаточно времени для мигания
         {
             _isVisible = !_isVisible; // Инвертируем видимость текста
             _text.enabled = _isVisible; // Применяем измененную видимость к тексту
